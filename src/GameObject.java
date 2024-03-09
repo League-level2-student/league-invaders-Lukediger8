@@ -4,6 +4,7 @@ public class GameObject {
 	int y;
 	int width;
 	int height;
+	boolean isActive = true;
 
 	public GameObject(int a, int b, int c, int d) {
 		x = a;
