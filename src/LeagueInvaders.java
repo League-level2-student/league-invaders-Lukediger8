@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -18,7 +19,7 @@ public class LeagueInvaders {
 	public static void main(String[] args) {
 
 		LeagueInvaders object = new LeagueInvaders();
-
+		
 		object.setup();
 
 	}
@@ -35,9 +36,9 @@ public class LeagueInvaders {
 		final int MENU = 0;
 		final int GAME = 1;
 		final int END = 2;
-
+		ObjectManager objectManager;
 		Timer frameDraw;
-
+		Timer alienSpawn;
 		Font titleFont;
 		Font subTitle;
 		Font subTitle2;
@@ -50,13 +51,22 @@ public class LeagueInvaders {
 			frameDraw = new Timer(1000 / 60, this);
 			frameDraw.start();
 			rocketship = new Rocketship(250, 700, 50, 50);
-
+			objectManager = new ObjectManager(rocketship);
 			if (needImage) {
 			    loadImage("space.png");
+		
 			}
-			
+			startGame();
+		
 		}
-
+		
+		void startGame() {
+		    alienSpawn = new Timer(1000, objectManager);
+		    alienSpawn.start();
+		    frameDraw = new Timer(1000/60, this);
+		    frameDraw.start();
+		}
+		
 		void updateMenuState() {
 
 		}
@@ -88,6 +98,7 @@ public class LeagueInvaders {
 		        try {
 		            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
 		            gotImage = true;
+		            System.out.println("loaded image");
 		        } catch (Exception e) {
 		            System.out.println("catch");
 		        }
@@ -96,18 +107,17 @@ public class LeagueInvaders {
 		} 
 
 		void drawGameState(Graphics g) {
+			
+			if (gotImage) {
+				g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
+							} 
+			else {
+				g.setColor(Color.BLUE);
+				g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		
+			}
 			rocketship.draw(g);
-
-			g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
-//			if (gotImage) {
-//				g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
-//			} 
-//			else {
-//				g.setColor(Color.BLUE);
-//				g.fillRect(0, 0, WIDTH, HEIGHT);
-//			}
-		
+			objectManager.draw(g);
 		}
 
 		void drawEndState(Graphics g) {
@@ -183,6 +193,10 @@ public class LeagueInvaders {
 					rocketship.right();
 				}
 			}
+			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+				objectManager.addProjectile(rocketship.getProjectile());
+			}
+		
 		}
 
 		@Override

@@ -23,7 +23,7 @@ public class Rocketship extends GameObject {
 	    if (needImage) {
 	        try {
 	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-	            gotImage = true;
+		    gotImage = true;
 	        } catch (Exception e) {
 	            
 	        }
@@ -48,6 +48,11 @@ public class Rocketship extends GameObject {
 		y += speed;
 	}
 
+	public Projectile getProjectile() {
+        return new Projectile(x+width/2, y, 10, 10);
+} 
+
+	
 	public void draw(Graphics g) {
 		//g.setColor(Color.BLUE);
 		//g.fillRect(x, y, width, height);
