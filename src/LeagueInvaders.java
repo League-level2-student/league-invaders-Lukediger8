@@ -98,13 +98,15 @@ public class LeagueInvaders {
 		void drawGameState(Graphics g) {
 		
 			rocketship.draw(g);
-			if (gotImage) {
-				g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
-			} 
-			else {
-				g.setColor(Color.BLUE);
-				g.fillRect(0, 0, WIDTH, HEIGHT);
-			}
+
+			g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
+//			if (gotImage) {
+//				g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
+//			} 
+//			else {
+//				g.setColor(Color.BLUE);
+//				g.fillRect(0, 0, WIDTH, HEIGHT);
+//			}
 		
 		}
 
@@ -125,7 +127,7 @@ public class LeagueInvaders {
 
 		@Override
 		public void paintComponent(Graphics g) {
-			g.fillRect(10, 10, 100, 100);
+	
 			if (currentState == MENU) {
 				drawMenuState(g);
 			} else if (currentState == GAME) {

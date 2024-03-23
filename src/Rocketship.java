@@ -23,7 +23,7 @@ public class Rocketship extends GameObject {
 	    if (needImage) {
 	        try {
 	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-		    gotImage = true;
+	            gotImage = true;
 	        } catch (Exception e) {
 	            
 	        }
@@ -49,8 +49,8 @@ public class Rocketship extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		//g.setColor(Color.BLUE);
+		//g.fillRect(x, y, width, height);
 		if (gotImage) {
 			g.drawImage(image, x, y, width, height, null);
 		} else {
