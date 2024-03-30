@@ -22,6 +22,7 @@ public class Projectile extends GameObject {
 	public static boolean gotImage = false;	
 	public void update() {
 		y -= speed;
+		  super.update();
 	}
 
 	public void draw(Graphics g) {

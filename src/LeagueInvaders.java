@@ -50,21 +50,24 @@ public class LeagueInvaders {
 			subTitle2 = new Font("Arial", Font.PLAIN, 18);
 			frameDraw = new Timer(1000 / 60, this);
 			frameDraw.start();
+			alienSpawn = new Timer(1000 , objectManager);
+			alienSpawn.start();
 			rocketship = new Rocketship(250, 700, 50, 50);
 			objectManager = new ObjectManager(rocketship);
 			if (needImage) {
 			    loadImage("space.png");
-		
+					
 			}
+			
 			startGame();
 		
 		}
 		
 		void startGame() {
-		    alienSpawn = new Timer(1000, objectManager);
-		    alienSpawn.start();
 		    frameDraw = new Timer(1000/60, this);
 		    frameDraw.start();
+		    alienSpawn = new Timer(1000, objectManager);
+		    alienSpawn.start();
 		}
 		
 		void updateMenuState() {
@@ -72,7 +75,7 @@ public class LeagueInvaders {
 		}
 
 		void updateGameState() {
-			
+		objectManager.update();
 		}
 
 		void updateEndState() {
@@ -98,9 +101,9 @@ public class LeagueInvaders {
 		        try {
 		            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
 		            gotImage = true;
-		            System.out.println("loaded image");
+		   
 		        } catch (Exception e) {
-		            System.out.println("catch");
+		     
 		        }
 		        needImage = false;
 		    }
